@@ -45,8 +45,11 @@ module.exports = /******/ (() => {
         );
         console.log("github.context.payload.ref", github.context.payload.ref);
         console.log("github.context.eventName", github.context.eventName);
-        console.log("github.context.run_id", github.context.run_id);
-        console.log("fetch", fetch);
+        console.log(
+          "github.context.run_id",
+          github.context.run_id,
+          process.env.GITHUB_RUN_ID
+        );
         console.log("Date.now()", Date.now());
         console.log(JSON.stringify(github.context, null, 2));
         console.log(github.context.job.status);
