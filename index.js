@@ -96,6 +96,7 @@ async function sendMessage() {
         },
       ];
     }
+    console.log(JSON.stringify(jsonMessage, null, 2));
     await fetch(`${SLACK_WBEHOOK_URL}`, {
       headers: {
         Authorization: `Bearer ${SLACK_BUILDBOT_TOKEN}`,
