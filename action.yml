@@ -1,13 +1,27 @@
-name: 'Hello World'
-description: 'Greet someone and record the time'
+name: "Hello World"
+description: "Greet someone and record the time"
 inputs:
-  who-to-greet:  # id of input
-    description: 'Who to greet'
+  who-to-greet: # id of input
+    description: "Who to greet"
     required: true
-    default: 'World'
+  SLACK_BUILD_MONITOR_CHANNEL_ID:
+    description: "Slack channel Id"
+    required: true
+  SLACK_USER_TOKEN:
+    description: "Slack user token"
+    required: true
+  SLACK_WBEHOOK_URL:
+    description: "Slack incoming webhook url"
+    required: true
+  CONTENTFUL_ENTITY_CONTENT_TYPE:
+    description: "Content type of entry that changed"
+    required: false
+  CONTENTFUL_ENTITY_CONTENT:
+    description: "Title of entry that changed"
+    required: false
 outputs:
   time: # id of output
-    description: 'The time we greeted you'
+    description: "The time we greeted you"
 runs:
-  using: 'node12'
-  main: 'dist/index.js'
+  using: "node12"
+  main: "dist/index.js"
