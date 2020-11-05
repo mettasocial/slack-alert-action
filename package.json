@@ -1,0 +1,21 @@
+{
+  "name": "slack-alert-action",
+  "version": "1.0.0",
+  "description": "A github action to send message on slack using channelID, webhookURL and slack user token",
+  "main": "index.js",
+  "scripts": {
+    "build": "ncc build index.js --license licenses.txt"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com-mettasocial:mettasocial/slack-alert-action.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@actions/core": "^1.2.6",
+    "@actions/github": "^4.0.0",
+    "@vercel/ncc": "^0.24.1"
+  }
+}
