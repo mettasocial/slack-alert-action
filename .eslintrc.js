@@ -40,5 +40,5 @@ module.exports = {
     fetch: true,
   },
   plugins: ["import"],
-  ignorePatterns: ["node_modules/"],
+  ignorePatterns: ["node_modules/", "dist/"],
 };
