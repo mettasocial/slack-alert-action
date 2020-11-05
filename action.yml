@@ -7,7 +7,7 @@ inputs:
   SLACK_BUILD_MONITOR_CHANNEL_ID:
     description: "Slack channel Id"
     required: true
-  SLACK_USER_TOKEN:
+  SLACK_BUILDBOT_TOKEN:
     description: "Slack user token"
     required: true
   SLACK_WBEHOOK_URL:
