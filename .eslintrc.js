@@ -32,7 +32,6 @@ module.exports = {
         maxBOF: 0,
       },
     ],
-    camelcase: "error",
     semi: ["error", "always"],
   },
   globals: {

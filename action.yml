@@ -1,9 +1,6 @@
 name: "Hello World"
 description: "Greet someone and record the time"
 inputs:
-  who-to-greet: # id of input
-    description: "Who to greet"
-    required: true
   SLACK_BUILD_MONITOR_CHANNEL_ID:
     description: "Slack channel Id"
     required: true
@@ -13,12 +10,17 @@ inputs:
   SLACK_WBEHOOK_URL:
     description: "Slack incoming webhook url"
     required: true
+  JOB_STATUS:
+    description: "Status of your job"
+    required: true
   CONTENTFUL_ENTITY_CONTENT_TYPE:
     description: "Content type of entry that changed"
     required: false
+    default: ""
   CONTENTFUL_ENTITY_CONTENT:
     description: "Title of entry that changed"
     required: false
+    default: ""
 outputs:
   time: # id of output
     description: "The time we greeted you"
