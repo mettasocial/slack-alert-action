@@ -24,12 +24,18 @@ try {
   );
   console.log(`The event payload: ${payload}`);
   console.log(
-    "payload.head_commit.committer.username",
-    payload.head_commit.committer.username
+    "github.context.payload.head_commit.committer.username",
+    github.context.payload.head_commit.committer.username
   );
-  console.log("payload.head_commit.message", payload.head_commit.message);
-  console.log("payload.repository.full_name", payload.repository.full_name);
-  console.log("payload.ref", payload.ref);
+  console.log(
+    "github.context.payload.head_commit.message",
+    github.context.payload.head_commit.message
+  );
+  console.log(
+    "github.context.payload.repository.full_name",
+    github.context.payload.repository.full_name
+  );
+  console.log("github.context.payload.ref", github.context.payload.ref);
   console.log("github.context.eventName", github.context.eventName);
   console.log("github.context.run_id", github.context.run_id);
   console.log("fetch", fetch);
