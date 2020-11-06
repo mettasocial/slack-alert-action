@@ -34,19 +34,11 @@ module.exports = /******/ (() => {
           const SLACK_BUILDBOT_TOKEN = core.getInput("SLACK_BUILDBOT_TOKEN");
           const SLACK_WBEHOOK_URL = core.getInput("SLACK_WBEHOOK_URL");
           const JOB_STATUS = core.getInput("JOB_STATUS");
-          const CONTENTFUL_ENTITY_CONTENT_TYPE = core.getInput(
-            "CONTENTFUL_ENTITY_CONTENT_TYPE"
-          );
-          const CONTENTFUL_ENTITY_CONTENT = core.getInput(
-            "CONTENTFUL_ENTITY_CONTENT"
-          );
           const GITHUB_REF = getenvNameByRef(payload.ref.split("/").pop());
           const GITHUB_REPOSITORY = payload.repository.full_name
             .split("/")
             .pop();
           const GITHUB_RUN_ID = context.runId;
-          const COMMIT_MESSAGE = payload.head_commit.message.trim();
-          const GITHUB_ACTOR = payload.head_commit.committer.username;
           //create basic template for json slack message
           let jsonMessage = {
             channel: SLACK_BUILD_MONITOR_CHANNEL_ID,
@@ -74,19 +66,22 @@ module.exports = /******/ (() => {
             jsonMessage.attachments[0].color = "#FF0000";
           }
           if (EVENT_NAME === "workflow_dispatch") {
+            const CONTENTFUL_ENTITY_CONTENT_TYPE = core.getInput(
+              "CONTENTFUL_ENTITY_CONTENT_TYPE"
+            );
+            const CONTENTFUL_ENTITY_CONTENT = core.getInput(
+              "CONTENTFUL_ENTITY_CONTENT"
+            );
             jsonMessage.attachments[0].fields = [
               {
                 title: `Title of changed Content: ${CONTENTFUL_ENTITY_CONTENT}`,
                 value: `Contentful content type changed : ${CONTENTFUL_ENTITY_CONTENT_TYPE}`,
                 short: false,
               },
-              {
-                title: "Check the pipeline link below for more details",
-                value: `https://github.com/${GITHUB_REPOSITORY}/actions/runs/${GITHUB_RUN_ID}`,
-                short: false,
-              },
             ];
           } else {
+            const COMMIT_MESSAGE = payload.head_commit.message.trim();
+            const GITHUB_ACTOR = payload.head_commit.committer.username;
             jsonMessage.attachments[0].fields = [
               {
                 title: "Last commit by",
@@ -98,13 +93,13 @@ module.exports = /******/ (() => {
                 value: COMMIT_MESSAGE,
                 short: true,
               },
-              {
-                title: "Check the pipeline link below for more details",
-                value: `https://github.com/${GITHUB_REPOSITORY}/actions/runs/${GITHUB_RUN_ID}`,
-                short: false,
-              },
             ];
           }
+          jsonMessage.attachments[0].fields.push({
+            title: "Check the pipeline link below for more details",
+            value: `https://github.com/${GITHUB_REPOSITORY}/actions/runs/${GITHUB_RUN_ID}`,
+            short: false,
+          });
           await fetch(`${SLACK_WBEHOOK_URL}`, {
             headers: {
               Authorization: `Bearer ${SLACK_BUILDBOT_TOKEN}`,
