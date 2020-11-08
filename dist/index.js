@@ -14,7 +14,12 @@ module.exports = /******/ (() => {
         if (ref === "develop") {
           return "development";
         }
-        if (ref === "master" || ref === "main") {
+        if (
+          ref === "master" ||
+          ref === "main" ||
+          ref === "staging" ||
+          ref.includes("staging")
+        ) {
           return "staging";
         }
         if (ref.includes("production")) {
